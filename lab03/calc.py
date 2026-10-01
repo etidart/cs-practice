@@ -4,6 +4,9 @@ def add(a, b):
 def subtract(a, b):
     return a - b
 
+def multiply(a, b):
+    return a * b
+
 a, operation, b = input().split()
 
 a = float(a)
@@ -13,4 +16,8 @@ if operation == "+":
     print(add(a, b))
 elif operation == "-":
     print(subtract(a, b))
+elif operation == "*":
+    print(multiply(a, b))
+else:
+    print("Unknown operation")
 
