@@ -10,6 +10,8 @@ def parse_event(line):
 def count_levels(lines):
     res = {}
     for line in lines:
+        if not line.strip():
+            continue
         try:
             ev = parse_event(line)
             res[ev['level']] = res.get(ev['level'], 0) + 1

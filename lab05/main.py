@@ -8,8 +8,8 @@ with open(log_file, encoding='utf-8', mode='r') as log:
     print(lines)
     log.seek(0)
     cl = count_levels(log)
-    print(cl['ERROR'])
-    print(cl['BROKEN'])
+    print(cl.get('ERROR', 0))
+    print(cl.get('BROKEN', 0))
     log.seek(0)
     te = top_errors(log, 3)
     with open('report.txt', mode='w+', encoding='utf-8') as report:
