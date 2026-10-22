@@ -2,6 +2,7 @@ from pathlib import Path
 def count_by_extension(paths):
     res = {}
     for file in paths:
+        file = file.lower()
         file = Path(file)
         res[file.suffix[1:]] = res.get(file.suffix[1:], 0) + 1
     return res
