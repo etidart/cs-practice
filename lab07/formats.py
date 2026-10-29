@@ -1,10 +1,16 @@
-import csv, json, io
-def csv_to_records(text):
-    reader = csv.DictReader(io.StringIO(text))
-    answ = []
-    for row in reader:
-        answ.append(row)
-    return answ
+import json
+def csv_to_records(text: str):
+    lines = [line for line in text.splitlines() if line.strip()]
+    if not lines:
+        return []
+    headers = [h.strip() for h in lines[0].split(',')]
+    records = []
+    for line in lines[1:]:
+        values = [v.strip() for v in line.split(',')]
+        row = dict(zip(headers, values))
+        if any(row.values()):
+            records.append(row)
+    return records
 
 def convert_type(s):
     if all(map(str.isdigit, s)):
@@ -48,10 +54,11 @@ def parse_settings(lines):
 
 def merge_by_key(rows, extra, key):
     for row in rows:
-        if row[key] in extra.keys():
-            row.update(extra[row[key]])
+        if key in row and row[key] in extra:
+            extra_data = extra[row[key]]
+            if isinstance(extra_data, dict):
+                row.update(extra_data)
     return rows
 
 def records_to_json(records):
     return json.dumps(records, ensure_ascii=False, indent=2, sort_keys=True)
-
