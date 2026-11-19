@@ -39,3 +39,10 @@ changed_matrix[1, :] = 0
 changed_matrix[:, -1] = -1
 changed_matrix[1:4, 1:4] = 100
 print(changed_matrix, matrix, sep='\n')
+print()
+# task 6
+numbers = np.arange(0, 12)
+table = numbers.reshape((3, 4))
+transposed = table.T
+print(numbers.shape, table.shape, transposed.shape)
+# reshape(5, 3) вызовет ошибку потому что в массиве numbers не хватит элементов для такого действия
